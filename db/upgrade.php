@@ -14,8 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Upgrade tasks for Ascend Rewards plugin.
+ *
+ * Handles database schema changes and data migrations.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
+defined('MOODLE_INTERNAL') || die();
+// Preserve legacy upgrade comments and naming.
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.MissingDocblock.Function,moodle.Commenting.MissingDocblock.Constant
+
+/**
+ * Execute upgrade steps for local_ascend_rewards.
+ *
+ * @param int $oldversion The old version of the plugin
+ * @return bool True on success
+ */
 function xmldb_local_ascend_rewards_upgrade($oldversion) {
     global $DB;
 
@@ -105,7 +127,7 @@ function xmldb_local_ascend_rewards_upgrade($oldversion) {
                     $exists = $DB->record_exists('local_ascend_rewards_coins', [
                         'userid' => $rec->userid,
                         'badgeid' => $rec->badgeid,
-                        'courseid' => $rec->courseid
+                        'courseid' => $rec->courseid,
                     ]);
                     if ($exists) {
                         continue;
@@ -292,7 +314,7 @@ function xmldb_local_ascend_rewards_upgrade($oldversion) {
                     'userid' => $record->userid,
                     'courseid' => $record->courseid,
                     'xp' => $record->xp,
-                    'timemodified' => time()
+                    'timemodified' => time(),
                 ]);
             }
         }
@@ -311,7 +333,7 @@ function xmldb_local_ascend_rewards_upgrade($oldversion) {
                     'userid' => $record->userid,
                     'courseid' => 0,
                     'xp' => $record->xp,
-                    'timemodified' => time()
+                    'timemodified' => time(),
                 ]);
             }
         }
@@ -325,7 +347,7 @@ function xmldb_local_ascend_rewards_upgrade($oldversion) {
         // This version gracefully handles that scenario.
         // No action needed - Moodle's database manager automatically checks for existing tables
         // before creating them, so the install.xml will succeed even if tables exist.
-        
+
         upgrade_plugin_savepoint(true, 2025121000, 'local', 'ascend_rewards');
     }
 

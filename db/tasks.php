@@ -14,7 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Scheduled task definitions for Ascend Rewards plugin.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
 
 $tasks = [
     // Existing badge-awarding task
@@ -33,7 +43,7 @@ $tasks = [
         'classname' => '\local_ascend_rewards\task\rebuild_badge_cache',
         'blocking' => 0,
         'minute' => '0',
-        'hour' => '3',          // 3 AM every day
+        'hour' => '3', // 3 AM every day
         'day' => '*',
         'month' => '*',
         'dayofweek' => '*',

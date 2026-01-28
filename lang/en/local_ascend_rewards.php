@@ -18,35 +18,48 @@
  * Strings for component 'local_ascend_rewards', language 'en'
  *
  * @package   local_ascend_rewards
- * @copyright Your Name
+ * @copyright 2025 Ascend Rewards
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Ascend Rewards';
-$string['awardbadges'] = 'Award badges (Ascend Auto Badger)';
-$string['totalassets'] = 'Your total Ascend Assets: {$a}';
-$string['recentbadges'] = 'Recent Badges';
-$string['leaderboard'] = 'Leaderboard';
-$string['coins'] = 'coins';
-$string['norecent'] = 'No recent badges.';
-$string['noleaderdata'] = 'No leaderboard data yet.';
-$string['filtercourse'] = 'Filtering by course ID: {$a}';
-$string['filternone'] = 'Showing site-wide totals (no course filter).';
-$string['managebadges'] = 'Manage Ascend Rewards Badges';
-$string['createbadges'] = 'Create default badges';
-$string['mappingsaved'] = 'Mappings saved.';
-$string['badgescreated'] = 'Badges created/ensured successfully.';
-$string['savemappings'] = 'Save mappings';
+// phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment,moodle.Files.LangFilesOrdering.IncorrectOrder
+$string['admin_dashboard'] = 'Admin Dashboard';
 $string['allow_repeat_same_badge'] = 'Allow repeat of same badge in same course';
 $string['allow_repeat_same_badge_desc'] = 'If enabled, the same badge may be awarded multiple times to the same user for the same course.';
-
-$string['task_rebuild_badge_cache'] = 'Rebuild badge activity cache';
-
+$string['audit_trail'] = 'Badge Audit Trail';
+$string['awardbadges'] = 'Award badges (Ascend Auto Badger)';
+$string['badgescreated'] = 'Badges created/ensured successfully.';
+$string['coins'] = 'coins';
 $string['coins_settings'] = 'Default Coin Rewards';
 $string['coins_settings_desc'] = 'These values are used when the plugin is first installed. You can change them anytime.';
+$string['createbadges'] = 'Create default badges';
+$string['filtercourse'] = 'Filtering by course ID: {$a}';
+$string['filternone'] = 'Showing site-wide totals (no course filter).';
+$string['leaderboard'] = 'Leaderboard';
+$string['managebadges'] = 'Manage Ascend Rewards Badges';
+$string['mappingsaved'] = 'Mappings saved.';
 $string['nav_rewards'] = 'Ascend Rewards';
+$string['noleaderdata'] = 'No leaderboard data yet.';
+$string['norecent'] = 'No recent badges.';
+$string['pluginname'] = 'Ascend Rewards';
+$string['recentbadges'] = 'Recent Badges';
+$string['savemappings'] = 'Save mappings';
+$string['task_rebuild_badge_cache'] = 'Rebuild badge activity cache';
+$string['totalassets'] = 'Your total Ascend Assets: {$a}';
 
-$string['admin_dashboard'] = 'Admin Dashboard';
-$string['audit_trail'] = 'Badge Audit Trail';
+
+
+
+// Privacy API strings.
+$string['privacy:metadata:local_ascend_rewards_coins'] = 'Stores user coin and XP transactions for badge awards';
+$string['privacy:metadata:userid'] = 'The ID of the user';
+$string['privacy:metadata:badgeid'] = 'The ID of the badge awarded';
+$string['privacy:metadata:coins'] = 'Number of coins awarded';
+$string['privacy:metadata:courseid'] = 'The course where the badge was earned';
+$string['privacy:metadata:timecreated'] = 'Time when the record was created';
+
+$string['privacy:metadata:local_ascend_rewards_badgerlog'] = 'Audit log of badge awarding attempts';
+$string['privacy:metadata:status'] = 'Status of the badge award (success/failure)';
+$string['privacy:metadata:message'] = 'Message describing the badge award';

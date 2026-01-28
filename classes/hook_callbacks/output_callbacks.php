@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-defined('MOODLE_INTERNAL') || die();
-
 namespace local_ascend_rewards\hook_callbacks;
 
 /**
@@ -26,14 +24,18 @@ namespace local_ascend_rewards\hook_callbacks;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class output_callbacks {
-    
     /**
      * Hook callback to inject badge notification on all pages.
      *
      * @param \core\hook\output\before_standard_top_of_body_html_generation $hook
      */
-    public static function before_standard_top_of_body_html(\core\hook\output\before_standard_top_of_body_html_generation $hook): void {
-        $output = local_ascend_rewards_before_standard_top_of_body_html();
+    public static function before_standard_top_of_body_html(
+        \core\hook\output\before_standard_top_of_body_html_generation $hook
+    ): void {
+
+        global $CFG;
+        require_once($CFG->dirroot . '/local/ascend_rewards/lib.php');
+        $output = \local_ascend_rewards_before_standard_top_of_body_html();
         $hook->add_html($output);
     }
 }

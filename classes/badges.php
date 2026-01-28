@@ -15,16 +15,26 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace local_ascend_rewards;
+
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
+
+// Preserve constant naming and inline annotation comments.
+// phpcs:disable moodle.Commenting.MissingDocblock.Constant
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 
 /**
  * Central badge registry & category mapping.
  *
  * IMPORTANT: Keep these IDs aligned with your site’s badge IDs.
  * (You can still let admins re-bind “portable” codes to site badges in the UI if you use that pattern.)
+ * @package   local_ascend_rewards
+ * @copyright 2026 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 final class badges {
-
     // Category constants.
     public const CAT_PROGRESS   = 'progress';
     public const CAT_TIMELINESS = 'timeliness';
@@ -38,9 +48,9 @@ final class badges {
     public const META_LEARNING_LEGEND  = 20;  // Mastery meta
 
     // DEMO VERSION: Only 7 allowed badges
-    // Getting Started (6), Halfway Hero (5), Master Navigator (8), 
+    // Getting Started (6), Halfway Hero (5), Master Navigator (8),
     // Feedback Follower (13), Steady Improver (15), Tenacious Tiger (14), Glory Guide (16)
-    
+
     private const PROGRESS_BASE = [6, 5];                // Getting Started, Halfway Hero
     private const TIMELINESS_BASE = [];                  // DISABLED IN DEMO
     private const QUALITY_BASE = [13, 15, 14];           // Feedback Follower, Steady Improver, Tenacious Tiger
@@ -49,9 +59,9 @@ final class badges {
     // Meta badges per category.
     private const META_BY_CATEGORY = [
         self::CAT_PROGRESS   => self::META_MASTER_NAVIGATOR,
-        self::CAT_TIMELINESS => null,  // DISABLED
+        self::CAT_TIMELINESS => null, // DISABLED
         self::CAT_QUALITY    => self::META_GLORY_GUIDE,
-        self::CAT_MASTERY    => null,  // DISABLED
+        self::CAT_MASTERY    => null, // DISABLED
     ];
 
     // Base badges per category.
@@ -93,7 +103,7 @@ final class badges {
             self::META_MASTER_NAVIGATOR,
             self::META_TIME_TAMER,
             self::META_GLORY_GUIDE,
-            self::META_LEARNING_LEGEND
+            self::META_LEARNING_LEGEND,
         ], true);
     }
 

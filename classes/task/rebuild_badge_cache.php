@@ -16,77 +16,87 @@
 
 namespace local_ascend_rewards\task;
 
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Scheduled task to rebuild badge activity cache at 3am
- * This ensures all cache is up-to-date and validates the data
+ * Scheduled task to rebuild the badge activity cache nightly.
+ *
+ * This ensures cache data is up to date and validated.
+ *
+ * @package    local_ascend_rewards
+ * @copyright  2026 Ascend
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class rebuild_badge_cache extends \core\task\scheduled_task {
-    
     /**
-     * Get task name
+     * Get the task name shown in scheduled tasks UI.
+     *
+     * @return string
      */
     public function get_name() {
         return get_string('task_rebuild_badge_cache', 'local_ascend_rewards');
     }
-    
+
     /**
-     * Execute the task
+     * Execute the badge cache rebuild workflow.
+     *
+     * @return void
      */
     public function execute() {
         global $DB;
-        
+
         mtrace('Starting badge cache rebuild...');
-        
-        // Rebuild missing cache entries (max 2000 per night)
+
+        // Rebuild missing cache entries (max 2000 per night).
         $helper = new \local_ascend_rewards\badge_cache_helper();
         $rebuilt = $helper->rebuild_all_cache(2000);
-        
+
         mtrace("Rebuilt {$rebuilt} cache entries");
-        
-        // Verify existing cache entries (sample 500 random entries)
-        // Note: Using RAND() for randomization instead of sql_random()
-        $cached_entries = $DB->get_records_sql(
+
+        // Verify existing cache entries (sample 500 random entries).
+        // Note: Using RAND() for randomization instead of sql_random().
+        $cachedentries = $DB->get_records_sql(
             "SELECT * FROM {local_ascend_badge_cache}
           ORDER BY RAND()
              LIMIT 500"
         );
-        
+
         $verified = 0;
         $corrected = 0;
-        
-        foreach ($cached_entries as $entry) {
-            // Recalculate and compare
+
+        foreach ($cachedentries as $entry) {
+            // Recalculate and compare.
             $fresh = $helper->calculate_activities($entry->userid, $entry->courseid, $entry->badgeid);
-            
-            $cached_activities = json_decode($entry->activities, true);
-            $cached_metadata = json_decode($entry->metadata, true);
-            
-            // Simple comparison - if different, update
-            if (json_encode($cached_activities) !== json_encode($fresh['activities']) ||
-                json_encode($cached_metadata) !== json_encode($fresh['metadata'])) {
-                
-                // Update cache with corrected data
+
+            $cachedactivities = json_decode($entry->activities, true);
+            $cachedmetadata = json_decode($entry->metadata, true);
+
+            // Simple comparison - if different, update.
+            if (
+                json_encode($cachedactivities) !== json_encode($fresh['activities']) ||
+                json_encode($cachedmetadata) !== json_encode($fresh['metadata'])
+            ) {
+                // Update cache with corrected data.
                 $entry->activities = json_encode($fresh['activities']);
                 $entry->metadata = json_encode($fresh['metadata']);
                 $entry->timemodified = time();
                 $DB->update_record('local_ascend_badge_cache', $entry);
-                
+
                 $corrected++;
             }
-            
+
             $verified++;
         }
-        
+
         mtrace("Verified {$verified} cache entries, corrected {$corrected}");
-        
-        // Clean up old cache entries for deleted users/courses
+
+        // Clean up old cache entries for deleted users/courses.
         $sql = "DELETE FROM {local_ascend_badge_cache}
                  WHERE userid NOT IN (SELECT id FROM {user} WHERE deleted = 0)
                     OR courseid NOT IN (SELECT id FROM {course})";
         $DB->execute($sql);
-        
+
         mtrace('Badge cache rebuild complete');
     }
 }

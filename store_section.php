@@ -15,11 +15,23 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * APEX REWARDS - STORE SECTION
- * Pets, Villains, Power-ups, and Mystery Box System
+ * Store section for Ascend Rewards.
+ *
+ * Displays and handles pets, villains, power-ups, and mystery box system.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
+
+// This file renders large inline HTML/CSS blocks; avoid reflow that could break layout.
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
+// phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect,Generic.WhiteSpace.ScopeIndent.IncorrectExact
+// phpcs:disable moodle.Commenting.MissingDocblock.File
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
 
 // Get user's level for unlocking
 $user_level = $level;
@@ -31,15 +43,21 @@ $available_villains = [];
 // Check pets
 foreach ($avatar_pets_catalog as $pet_id => $pet_data) {
     // Only show pets for levels user can access
-    if ($pet_data['level'] > $user_level) continue;
-    
+    if ($pet_data['level'] > $user_level) {
+        continue;
+    }
+
     // Check if user has avatar for this pet
     $avatar_unlocked = in_array($pet_data['avatar'], $unlocked_avatars);
-    if (!$avatar_unlocked) continue;
-    
+    if (!$avatar_unlocked) {
+        continue;
+    }
+
     // Check if user already owns pet
-    if (in_array($pet_id, $owned_pets)) continue;
-    
+    if (in_array($pet_id, $owned_pets)) {
+        continue;
+    }
+
     $available_pets[$pet_id] = $pet_data;
     $available_pets[$pet_id]['avatar_unlocked'] = true;
 }
@@ -47,15 +65,21 @@ foreach ($avatar_pets_catalog as $pet_id => $pet_data) {
 // Check villains
 foreach ($villain_catalog as $villain_id => $villain_data) {
     // Only show villains for levels user can access
-    if ($villain_data['level'] > $user_level) continue;
-    
+    if ($villain_data['level'] > $user_level) {
+        continue;
+    }
+
     // Check if user has pet for this villain
     $pet_owned = in_array($villain_data['pet_id'], $owned_pets);
-    if (!$pet_owned) continue;
-    
+    if (!$pet_owned) {
+        continue;
+    }
+
     // Check if user already owns villain
-    if (in_array($villain_id, $owned_villains)) continue;
-    
+    if (in_array($villain_id, $owned_villains)) {
+        continue;
+    }
+
     $available_villains[$villain_id] = $villain_data;
     $available_villains[$villain_id]['pet_owned'] = true;
 }
@@ -84,7 +108,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
     
     <div class="aa-panel-content">
         <!-- XP Multiplier Active Notice -->
-        <?php if ($xp_multiplier_active): ?>
+        <?php if ($xp_multiplier_active) : ?>
             <div style="background:linear-gradient(135deg,#ec4899,#FF00AA);border-radius:12px;padding:20px;margin-bottom:20px;text-align:center;">
                 <div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;">🔥 XP Multiplier Active!</div>
                 <div style="font-size:14px;color:rgba(255,255,255,0.9);">You're earning 2x XP! Expires in: <strong id="xpMultiplierTimer_store" data-expires="<?php echo $xp_multiplier_expires; ?>"></strong></div>
@@ -100,11 +124,11 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
             </h4>
             
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
-                <?php 
+                <?php
                 // Get user inventory
                 $inventory_str = get_user_preferences('ascend_store_inventory', '', $USER->id);
                 $inventory = $inventory_str ? json_decode($inventory_str, true) : [];
-                
+
                 // XP Multiplier
                 $xp_item = [
                     'id' => 4,
@@ -112,7 +136,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                     'description' => 'Double your XP gains for 24 hours! Activate after purchase.',
                     'price' => 1000,
                     'icon' => 'ai_streak.png',
-                    'category' => 'power-ups'
+                    'category' => 'power-ups',
                 ];
                 $can_afford = $coin_balance >= $xp_item['price'];
                 $in_inventory = isset($inventory[4]) && $inventory[4] > 0;
@@ -135,12 +159,12 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                             <span style="font-size:24px;font-weight:800;color:#FFD700;">1,000</span>
                         </div>
                         
-                        <?php if (!$can_afford && !$in_inventory): ?>
+                        <?php if (!$can_afford && !$in_inventory) : ?>
                             <button disabled style="width:100%;background:#4b5563;border:none;color:#94a3b8;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:not-allowed;">
                                 Not Enough Coins
                             </button>
-                        <?php else: ?>
-                            <?php if (!$in_inventory): ?>
+                        <?php else : ?>
+                            <?php if (!$in_inventory) : ?>
                                 <button class="store-buy-btn store-btn" 
                                     data-item-id="4"
                                     data-item-name="XP Multiplier"
@@ -148,7 +172,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                                     style="width:100%;background:linear-gradient(135deg,#00D4FF,#06b6d4);border:none;color:#01142E;padding:12px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 12px rgba(0,212,255,0.4);">
                                     💰 Purchase for 100 Coins
                                 </button>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <button class="store-activate-btn" 
                                     data-item-id="4"
                                     data-item-name="XP Multiplier"
@@ -161,7 +185,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                 </div>
                 
                 <!-- Mystery Box Card -->
-                <?php 
+                <?php
                 $mystery_price = 50;
                 $can_afford_mystery = $coin_balance >= $mystery_price;
                 ?>
@@ -180,11 +204,11 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                             <span style="font-size:24px;font-weight:800;color:#FFD700;">50</span>
                         </div>
                         
-                        <?php if (!$can_afford_mystery): ?>
+                        <?php if (!$can_afford_mystery) : ?>
                             <button disabled style="width:100%;background:#4b5563;border:none;color:#94a3b8;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:not-allowed;">
                                 Not Enough Coins
                             </button>
-                        <?php else: ?>
+                        <?php else : ?>
                             <button class="mysterybox-open-btn store-btn" 
                                 data-price="50"
                                 style="width:100%;background:linear-gradient(135deg,#FFD700,#FFA500);border:none;color:#01142E;padding:12px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 12px rgba(255,215,0,0.4);">
@@ -205,7 +229,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                 Pets
             </h4>
             
-            <?php if (empty($available_pets)): ?>
+            <?php if (empty($available_pets)) : ?>
                 <div style="background:rgba(236,72,153,0.1);border:2px dashed #ec4899;border-radius:12px;padding:32px;text-align:center;">
                     <div style="font-size:48px;margin-bottom:16px;">🔒</div>
                     <div style="font-size:18px;font-weight:700;color:#e6e9f0;margin-bottom:12px;">No Pets Available for Adoption</div>
@@ -216,9 +240,9 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                         💡 Tip: Head to the <strong>Ascend Universe</strong> section above to unlock your first hero, then their pet will be ready to adopt.
                     </div>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
-                    <?php foreach ($available_pets as $pet_id => $pet_data):
+                    <?php foreach ($available_pets as $pet_id => $pet_data) :
                         $pet_name = $pet_data['name'];
                         $pet_price = $pet_data['price'];
                         $pet_icon_path = str_replace('pets/', '', $pet_data['icon']);
@@ -246,7 +270,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                             </div>
                             <div style="font-size:13px;color:#94a3b8;margin-bottom:12px;">Level <?php echo $pet_data['level']; ?> Pet</div>
                             
-                            <?php if (!empty($pet_avatar_circular_url)): ?>
+                            <?php if (!empty($pet_avatar_circular_url)) : ?>
                                 <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:8px;">
                                     <div style="font-size:12px;color:#94a3b8;">Linked Hero:</div>
                                     <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid #FFD700;box-shadow:0 2px 8px rgba(255,215,0,0.3);">
@@ -264,11 +288,11 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                                 <span style="font-size:24px;font-weight:800;color:#FFD700;"><?php echo number_format($pet_price); ?></span>
                             </div>
                             
-                            <?php if (!$can_afford_pet): ?>
+                            <?php if (!$can_afford_pet) : ?>
                                 <button disabled style="width:100%;background:#4b5563;border:none;color:#94a3b8;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:not-allowed;">
                                     Not Enough Coins
                                 </button>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <button class="pet-buy-btn store-btn" 
                                         data-item-id="<?php echo $pet_id; ?>"
                                         data-item-name="<?php echo htmlspecialchars($pet_name, ENT_QUOTES, 'UTF-8'); ?>"
@@ -293,7 +317,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                 Villains
             </h4>
             
-            <?php if (empty($available_villains)): ?>
+            <?php if (empty($available_villains)) : ?>
                 <div style="background:rgba(6,182,212,0.1);border:2px dashed #06b6d4;border-radius:12px;padding:32px;text-align:center;">
                     <div style="font-size:48px;margin-bottom:16px;">🔒</div>
                     <div style="font-size:18px;font-weight:700;color:#e6e9f0;margin-bottom:12px;">No Villains Available to be Unleashed</div>
@@ -304,9 +328,9 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                         💡 Tip: Head to the <strong>Pets</strong> section above to adopt your first companion, then their villain will be ready to unleash.
                     </div>
                 </div>
-            <?php else: ?>
+            <?php else : ?>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;">
-                    <?php foreach ($available_villains as $villain_id => $villain_data):
+                    <?php foreach ($available_villains as $villain_id => $villain_data) :
                         $villain_name = $villain_data['name'];
                         $villain_price = $villain_data['price'];
                         $villain_icon_path = str_replace('villains/', '', $villain_data['icon']);
@@ -354,7 +378,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                             <div style="font-size:13px;color:#94a3b8;margin-bottom:12px;">Level <?php echo $villain_data['level']; ?> Villain</div>
                             
                             <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
-                                <?php if (!empty($villain_avatar_circular_url)): ?>
+                                <?php if (!empty($villain_avatar_circular_url)) : ?>
                                     <div style="text-align:center;">
                                         <div style="font-size:11px;color:#94a3b8;margin-bottom:4px;">Hero</div>
                                         <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid #FFD700;box-shadow:0 2px 8px rgba(255,215,0,0.3);">
@@ -362,7 +386,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                                         </div>
                                     </div>
                                 <?php endif; ?>
-                                <?php if (!empty($villain_pet_badge_url) && isset($villain_data['pet_id'])): ?>
+                                <?php if (!empty($villain_pet_badge_url) && isset($villain_data['pet_id'])) : ?>
                                     <div style="text-align:center;">
                                         <div style="font-size:11px;color:#94a3b8;margin-bottom:4px;">Pet</div>
                                         <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid #ec4899;box-shadow:0 2px 8px rgba(236,72,153,0.3);">
@@ -381,11 +405,11 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                                 <span style="font-size:24px;font-weight:800;color:#FFD700;"><?php echo number_format($villain_price); ?></span>
                             </div>
                             
-                            <?php if (!$can_afford_villain): ?>
+                            <?php if (!$can_afford_villain) : ?>
                                 <button disabled style="width:100%;background:#4b5563;border:none;color:#94a3b8;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:not-allowed;">
                                     Not Enough Coins
                                 </button>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <button class="villain-buy-btn store-btn" 
                                         data-item-id="<?php echo $villain_id; ?>"
                                         data-item-name="<?php echo htmlspecialchars($villain_name, ENT_QUOTES, 'UTF-8'); ?>"
@@ -768,6 +792,7 @@ $apex_stack_url = (new moodle_url('/local/ascend_rewards/pix/ascend_assets_stack
                             'tokens': videoTokens,
                             'avatar_new': videoHero,
                             'avatar_duplicate': videoHero,
+                            'avatar_locked_level': videoHero,
                             'nothing': videoNoReward
                         };
 

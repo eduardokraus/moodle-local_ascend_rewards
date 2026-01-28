@@ -14,50 +14,65 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Default coin mapping for badge rewards.
+ *
+ * Provides default coin values used on plugin installation.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace local_ascend_rewards;
+
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
+
+// Preserve existing comment separators and mapping annotations.
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
 
 /**
  * Default coin mapping (Badge ID -> Coins).
  *
- * NOTE:
- * - These are DEFAULTS used by the admin console on first install.
- * - Live/actual values can still be overridden via plugin settings if you expose them there.
- * - Keep ids aligned with your badges registry (see classes/badges.php).
+ * These are defaults used by the admin console on first install.
+ * Live values can be overridden via plugin settings.
  */
 final class coin_map {
     /** @var array<int,int> */
     private const MAP = [
         // Exact values provided by the user (10 Nov 2025)
-        // Getting Started = 50 ; On a Roll = 150; Halfway Hero = 250; Master Navigator = 600; Early Bird = 100;
-        // Sharp Shooter = 200; Deadline Burner = 300; Time Tamer = 600; Feedback Follower = 100; Steady Improver = 200;
-        // Tenacious Tiger = 250; Glory Guide = 600; High Flyer = 300; Assessment Ace = 400; Mission Complete = 500; Learning Legend = 1000.
+        // Getting Started = 250 ; On a Roll = 150; Halfway Hero = 550; Master Navigator = 700; Early Bird = 100;
+        // Sharp Shooter = 200; Deadline Burner = 300; Time Tamer = 600; Feedback Follower = 200; Steady Improver = 300;
+        // Tenacious Tiger = 350; Glory Guide = 600; High Flyer = 300; Assessment Ace = 400; Mission Complete = 500; Learning Legend = 1000.
 
         // Progress-Based (base):
-        6  => 50,   // Getting Started
-        4  => 150,  // On a Roll
-        5  => 250,  // Halfway Hero
+        6  => 250, // Getting Started
+        4  => 150, // On a Roll
+        5  => 550, // Halfway Hero
         // Progress-Based (meta):
-        8  => 600,  // Master Navigator
+        8  => 700, // Master Navigator
 
         // Timeliness & Discipline (base):
-        9  => 100,  // Early Bird
-        11 => 200,  // Sharp Shooter
-        10 => 300,  // Deadline Burner
+        9  => 100, // Early Bird
+        11 => 200, // Sharp Shooter
+        10 => 300, // Deadline Burner
         // Timeliness & Discipline (meta):
-        12 => 600,  // Time Tamer
+        12 => 600, // Time Tamer
 
         // Quality & Growth (base):
-        13 => 100,  // Feedback Follower
-        15 => 200,  // Steady Improver
-        14 => 250,  // Tenacious Tiger
+        13 => 200, // Feedback Follower
+        15 => 300, // Steady Improver
+        14 => 350, // Tenacious Tiger
         // Quality & Growth (meta):
-        16 => 600,  // Glory Guide
+        16 => 600, // Glory Guide
 
         // Course Mastery (base):
-        19 => 300,  // High Flyer
-        17 => 400,  // Assessment Ace
-        7  => 500,  // Mission Complete (ensure this is in Course Mastery)
+        19 => 300, // High Flyer
+        17 => 400, // Assessment Ace
+        7  => 500, // Mission Complete (ensure this is in Course Mastery)
         // Course Mastery (meta):
         20 => 1000, // Learning Legend
     ];

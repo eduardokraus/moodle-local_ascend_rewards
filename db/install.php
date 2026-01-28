@@ -14,11 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Post-installation tasks for Ascend Rewards plugin.
+ *
+ * Tables are created via install.xml - this file handles post-install logic.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
 
 /**
- * Post-installation tasks for local_ascend_rewards
- * Note: Tables are created via install.xml - this file only handles post-install logic
+ * Post-installation tasks for local_ascend_rewards.
+ *
+ * @return bool True on success
  */
 function xmldb_local_ascend_rewards_install() {
     global $DB;

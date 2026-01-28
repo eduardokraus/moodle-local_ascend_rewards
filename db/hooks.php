@@ -17,9 +17,9 @@
 /**
  * Hook callbacks configuration.
  *
- * @package    local_ascend_rewards
- * @copyright  2026 Ascend Rewards
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -28,6 +28,11 @@ $callbacks = [
     [
         'hook' => \core\hook\output\before_standard_top_of_body_html_generation::class,
         'callback' => \local_ascend_rewards\hook_callbacks\output_callbacks::class . '::before_standard_top_of_body_html',
+        'priority' => 500,
+    ],
+    [
+        'hook' => \core\hook\navigation\primary_extend::class,
+        'callback' => \local_ascend_rewards\hook_callbacks\navigation_callbacks::class . '::primary_extend',
         'priority' => 500,
     ],
 ];

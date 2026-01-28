@@ -1,61 +1,91 @@
-﻿# Ascend Rewards Plugin
+# Ascend Rewards
 
-A comprehensive gamification plugin for Moodle that adds badges, coins, XP, and rewards system to enhance user engagement.
+A Moodle local plugin that gamifies learning through a comprehensive badge, coin, and reward system.
+
+## Description
+
+Ascend Rewards is a gamification plugin that automatically awards badges to students based on their learning activities and achievements. Students earn coins and experience points (XP) which they can use to unlock avatars, pets, and defeat villains. The plugin includes:
+
+- **Automatic Badge Awarding**: Seven different badge types that recognize various achievements
+- **Coin & XP Economy**: Students earn currency for completing badges
+- **Collectible System**: Unlock avatars, pets, and villains using earned coins
+- **Leaderboard**: Track progress and compete with peers
+- **Mystery Boxes**: Random rewards for added engagement
 
 ## Features
 
-- **Badge System**: 9 operational badges (Getting Started, On a Roll, Halfway Hero, Master Navigator, Feedback Follower, Steady Improver, Tenacious Tiger, Glory Guide, Level Up)
-- **Avatar Customization**: 2 avatar sets with leveling system (Elf & Imp, each with Lynx/Hamster and Dryad/Mole companions)
-- **Pet & Villain Companions**: Unlock and manage companions through gameplay
-- **Weekly Gameboard**: Pick-based weekly reward system
-- **Store & Power-ups**: Purchase items with coins, including XP multipliers
-- **Mystery Box**: Random reward system with pity mechanics
-- **Leaderboard Rankings**: Site-wide and course-specific XP rankings
-- **Performance Caching**: Optimized database queries for fast dashboard loads
+### Active Badges (7 types)
+- **Getting Started** - Complete your first activity
+- **Halfway Hero** - Reach 50% course completion  
+- **Master Navigator** - Achieve multiple meta-badges in a course
+- **Feedback Follower** - Submit assignments (repeatable)
+- **Steady Improver** - Show consistent grade improvement (repeatable)
+- **Tenacious Tiger** - Persist through challenges (repeatable)
+- **Glory Guide** - Help peers through forum participation
 
-## Installation
-
-1. Download/clone this plugin
-2. Extract to `moodle/local/ascend_rewards`
-3. Visit Moodle admin dashboard
-4. Run the installation process
-5. Configure coins per badge in Settings > Plugins > Local Plugins > Ascend Rewards
+### Gamification Elements
+- **Avatars**: Unlockable character avatars (Elf, Imp)
+- **Pets**: Companion pets (Lynx, Hamster)
+- **Villains**: Challenges to overcome (Dryad, Mole)
+- **Mystery Boxes**: Random reward system
+- **Weekly Gameboard**: Track weekly badge achievements
 
 ## Requirements
 
-- Moodle 4.2 or later (requires version 2022041900+)
+- Moodle 4.0 or higher (2022041900)
 - PHP 7.4 or higher
+- Moodle Badges core functionality enabled
 
-## Database Tables Created
+## Installation
 
-- `local_ascend_rewards_coins` - Main coin ledger
-- `local_ascend_rewards_gameboard` - Weekly gameboard picks
-- `local_ascend_badge_cache` - Badge activity cache
-- `local_ascend_rewards_badges` - Badge configuration
-- `local_ascend_rewards_badgerlog` - Badge awarding audit log
-- `local_ascend_mysterybox` - Mystery box tracking
-- `local_ascend_avatar_unlocks` - Avatar/pet/villain unlocks
-- `local_ascend_level_tokens` - Level-up unlock tokens
-- `local_ascend_xp` - XP tracking (separate from coins)
+1. Download the plugin and extract to `local/ascend_rewards/`
+2. Visit Site Administration > Notifications to trigger installation
+3. Configure default coin values in Settings
+4. The plugin will automatically create default badges on first run
 
-## Scheduled Tasks
+## Configuration
 
-- **Award Badges** - Runs every 5 minutes to award earned badges
-- **Rebuild Badge Cache** - Runs daily at 3 AM to maintain activity cache
+Navigate to **Site administration > Plugins > Local plugins > Ascend Rewards** to configure:
 
-## Author
+- Default coin rewards for each badge type
+- Badge repeat settings
+- Badge mapping to Moodle core badges
 
-ELANTIS
+## Usage
+
+### For Students
+1. Navigate to "Ascend Rewards" from the main navigation menu
+2. View earned badges, coin balance, and XP
+3. Visit the store to unlock avatars, pets, and villains
+4. Check the leaderboard to see rankings
+
+### For Teachers/Admins
+1. Access the admin dashboard from the Ascend Rewards page
+2. View badge audit trail
+3. Manually trigger badge cache rebuild if needed
+4. Monitor student engagement through the leaderboard
+
+## Privacy
+
+This plugin implements the Moodle Privacy API and stores:
+- User badge awards
+- Coin and XP transactions
+- Purchased avatars, pets, and villains
+
+Users can request deletion of this data through Moodle's standard privacy tools.
 
 ## License
 
-GNU General Public License v3 or later
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+## Author
+
+Local plugin developed for Moodle gamification.
 
 ## Support
 
-For issues, feature requests, or contributions, please contact the development team.
-
----
-
-**Version**: 1.2.1  
-**Last Updated**: January 2026
+For issues, questions, or contributions, please use the Moodle plugins directory or contact the plugin maintainer.

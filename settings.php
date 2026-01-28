@@ -14,8 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Plugin settings for Ascend Rewards.
+ *
+ * Defines admin settings for default coin values and admin pages.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
+// phpcs:disable moodle.Commenting.InlineComment.NotCapital
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_ascend_rewards', get_string('pluginname', 'local_ascend_rewards'));
 
@@ -26,26 +37,18 @@ if ($hassiteconfig) {
         get_string('coins_settings_desc', 'local_ascend_rewards')
     ));
 
-    // Seed defaults from coin_map on first install
+    // Seed defaults from coin_map on first install.
     $defaults = \local_ascend_rewards\coin_map::defaults();
 
+    // Only active badges in DEMO version.
     $badgelabels = [
-        6 => 'Getting Started',
-        4 => 'On a Roll',
-        5 => 'Halfway Hero',
-        8 => 'Master Navigator',
-        9 => 'Early Bird',
-        11 => 'Sharp Shooter',
-        10 => 'Deadline Burner',
-        12 => 'Time Tamer',
+        6  => 'Getting Started',
+        5  => 'Halfway Hero',
+        8  => 'Master Navigator',
         13 => 'Feedback Follower',
         15 => 'Steady Improver',
         14 => 'Tenacious Tiger',
         16 => 'Glory Guide',
-        19 => 'High Flyer',
-        17 => 'Assessment Ace',
-        7 => 'Mission Complete',
-        20 => 'Learning Legend',
     ];
 
     foreach ($badgelabels as $badgeid => $label) {

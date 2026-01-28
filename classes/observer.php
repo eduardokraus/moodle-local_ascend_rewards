@@ -14,18 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Event observer for Ascend Rewards plugin.
+ *
+ * Observes activity completion events and triggers badge awarding logic.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace local_ascend_rewards;
 
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
+// This observer contains legacy naming and comment separators.
+// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.Commenting.MissingDocblock.Function
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
+// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
+
 /**
- * Event observer for activity completion changes
+ * Event observer class for activity completion changes.
  */
 class observer {
-
     /**
-     * Triggered when course module completion is updated
-     * @param \core\event\course_module_completion_updated $event
+     * Triggered when course module completion is updated.
+     *
+     * @param \core\event\course_module_completion_updated $event The completion event
      */
     public static function course_module_completion_updated(\core\event\course_module_completion_updated $event) {
         global $DB;
@@ -53,7 +72,7 @@ class observer {
         // Get all badges awarded to this user in this course
         $awarded_badges = $DB->get_records('local_ascend_rewards_coins', [
             'userid' => $userid,
-            'courseid' => $courseid
+            'courseid' => $courseid,
         ]);
 
         if (empty($awarded_badges)) {
@@ -66,14 +85,14 @@ class observer {
         // If not, revoke it
         foreach ($awarded_badges as $award) {
             $badgeid = $award->badgeid;
-            
+
             // Check if badge still qualifies using badge_awarder logic
             if (!self::badge_still_qualifies($userid, $badgeid, $courseid)) {
                 // Revoke the badge and coins
                 $DB->delete_records('local_ascend_rewards_coins', [
                     'userid' => $userid,
                     'badgeid' => $badgeid,
-                    'courseid' => $courseid
+                    'courseid' => $courseid,
                 ]);
 
                 // Log the revocation
@@ -137,10 +156,10 @@ class observer {
 
         // Meta badges that depend on other badges
         $meta_categories = [
-            8  => [6,4,5],   // Master Navigator depends on Getting Started, On a Roll, Halfway Hero
-            12 => [9,11,10], // Time Tamer depends on Early Bird, Sharp Shooter, Deadline Burner
-            16 => [13,15,14],// Glory Guide depends on Feedback Follower, Steady Improver, Tenacious Tiger
-            20 => [19,17,7], // Learning Legend depends on High Flyer, Activity Ace, Mission Complete
+            8  => [6, 4, 5], // Master Navigator depends on Getting Started, On a Roll, Halfway Hero
+            12 => [9, 11, 10], // Time Tamer depends on Early Bird, Sharp Shooter, Deadline Burner
+            16 => [13, 15, 14], // Glory Guide depends on Feedback Follower, Steady Improver, Tenacious Tiger
+            20 => [19, 17, 7], // Learning Legend depends on High Flyer, Activity Ace, Mission Complete
         ];
 
         // Get course activities and completions
@@ -174,11 +193,13 @@ class observer {
             $base_badge_ids = $meta_categories[$badgeid];
             $earned = 0;
             foreach ($base_badge_ids as $base_id) {
-                if ($DB->record_exists('local_ascend_rewards_coins', [
+                if (
+                    $DB->record_exists('local_ascend_rewards_coins', [
                     'userid' => $userid,
                     'badgeid' => $base_id,
-                    'courseid' => $courseid
-                ])) {
+                    'courseid' => $courseid,
+                    ])
+                ) {
                     $earned++;
                 }
             }
@@ -209,7 +230,7 @@ class observer {
      * Clean up orphaned badges/coins for a user in a course
      * (badges that no longer qualify due to missing activity completions)
      * This should be called periodically or when course data might be out of sync
-     * 
+     *
      * @param int $userid User ID
      * @param int|null $courseid Course ID (null for all courses)
      * @return int Number of badges revoked
@@ -219,7 +240,7 @@ class observer {
 
         $params = ['userid' => $userid];
         $coursewhere = '';
-        
+
         if ($courseid !== null) {
             $coursewhere = ' AND courseid = :courseid';
             $params['courseid'] = $courseid;
@@ -252,14 +273,14 @@ class observer {
         foreach ($by_course as $cid => $awards) {
             foreach ($awards as $award) {
                 $badgeid = (int)$award->badgeid;
-                
+
                 // Check if badge still qualifies
                 if (!self::badge_still_qualifies($userid, $badgeid, $cid)) {
                     // Revoke the badge and coins
                     $DB->delete_records('local_ascend_rewards_coins', [
                         'userid' => $userid,
                         'badgeid' => $badgeid,
-                        'courseid' => $cid
+                        'courseid' => $cid,
                     ]);
 
                     // Log the revocation

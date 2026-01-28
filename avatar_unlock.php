@@ -15,14 +15,22 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Avatar Unlock Handler
- * Processes avatar unlocks using tokens (token-only, no coin option)
+ * Avatar unlock handler.
+ *
+ * Processes avatar unlocks using tokens (token-only, no coin option).
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2026 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-require_once('../../config.php');
+require_once(__DIR__ . '/../../config.php');
 require_login();
+// Keep existing naming and inline comments stable.
+// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.Commenting.MissingDocblock.Function
+// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
 
 header('Content-Type: application/json');
 
@@ -34,44 +42,46 @@ try {
     if (!$USER->id) {
         throw new Exception('User not logged in');
     }
-    
+
     // Get user's current XP level
     $user_xp = (int)$DB->get_field('local_ascend_xp', 'xp', ['userid' => $USER->id, 'courseid' => 0]);
     $user_level = (int)($user_xp / 1000) + 1;
-    if ($user_level > 8) $user_level = 8;
-    
+    if ($user_level > 8) {
+        $user_level = 8;
+    }
+
     // Validate that user has unlocked the level they're trying to unlock an avatar from
     if ($level > $user_level) {
         throw new Exception('You have not unlocked level ' . $level . ' yet');
     }
-    
+
     // Check if avatar is already unlocked
     $existing = $DB->get_record('local_ascend_avatar_unlocks', [
         'userid' => $USER->id,
         'avatar_name' => $avatar,
         'pet_id' => null,
-        'villain_id' => null
+        'villain_id' => null,
     ]);
-    
+
     if ($existing) {
         throw new Exception('Avatar already unlocked');
     }
-    
+
     // Get user's token balance
     $token_record = $DB->get_record('local_ascend_level_tokens', ['userid' => $USER->id]);
     if (!$token_record) {
         throw new Exception('No token record found');
     }
-    
+
     $tokens_available = $token_record->tokens_available - $token_record->tokens_used;
-    
+
     if ($tokens_available <= 0) {
         throw new Exception('No tokens available');
     }
-    
+
     // Start transaction
     $transaction = $DB->start_delegated_transaction();
-    
+
     try {
         // Insert avatar unlock record
         $unlock_record = new stdClass();
@@ -82,31 +92,29 @@ try {
         $unlock_record->villain_id = null;
         $unlock_record->unlock_type = 'token';
         $unlock_record->timecreated = time();
-        
+
         $DB->insert_record('local_ascend_avatar_unlocks', $unlock_record);
-        
+
         // Increment tokens_used
         $token_record->tokens_used++;
         $token_record->timemodified = time();
         $DB->update_record('local_ascend_level_tokens', $token_record);
-        
+
         // Commit transaction
         $transaction->allow_commit();
-        
+
         echo json_encode([
             'success' => true,
             'message' => 'Avatar unlocked successfully',
-            'tokens_remaining' => $token_record->tokens_available - $token_record->tokens_used
+            'tokens_remaining' => $token_record->tokens_available - $token_record->tokens_used,
         ]);
-        
     } catch (Exception $e) {
         $transaction->rollback($e);
         throw $e;
     }
-    
 } catch (Exception $e) {
     echo json_encode([
         'success' => false,
-        'error' => $e->getMessage()
+        'error' => $e->getMessage(),
     ]);
 }

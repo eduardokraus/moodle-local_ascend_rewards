@@ -16,14 +16,31 @@
 
 namespace local_ascend_rewards\task;
 
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Award badges on a schedule.
+ *
+ * @package    local_ascend_rewards
+ * @copyright  2026 Ascend
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class award_badges extends \core\task\scheduled_task {
-
+    /**
+     * Return the task name shown in scheduled tasks UI.
+     *
+     * @return string
+     */
     public function get_name() {
         return get_string('awardbadges', 'local_ascend_rewards');
     }
 
+    /**
+     * Execute the badge awarding workflow and log timing.
+     *
+     * @return void
+     */
     public function execute() {
         global $DB;
 
@@ -40,12 +57,11 @@ class award_badges extends \core\task\scheduled_task {
                 $skipped = (int)($summary->skipped ?? 0);
                 $errors  = (int)($summary->errors ?? 0);
                 mtrace("local_ascend_rewards: awarded={$awarded}, skipped={$skipped}, errors={$errors}");
-            } elseif (is_array($summary)) {
+            } else if (is_array($summary)) {
                 mtrace('local_ascend_rewards: run() returned array length=' . count($summary));
             } else {
                 mtrace('local_ascend_rewards: run() returned no summary');
             }
-
         } catch (\Throwable $e) {
             mtrace('local_ascend_rewards: ERROR in award_badges -> ' . $e->getMessage());
             throw $e;

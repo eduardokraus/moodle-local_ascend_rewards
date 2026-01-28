@@ -14,14 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+/**
+ * Navigation handler for Ascend Rewards plugin.
+ *
+ * Adds plugin links to Moodle navigation.
+ *
+ * @package   local_ascend_rewards
+ * @copyright 2025 Ascend Rewards
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Navigation class for adding Ascend Rewards to navigation menu.
+ */
 class local_ascend_rewards_navigation {
-
     /**
-     * Add Apex Rewards to primary navigation.
+     * Add Ascend Rewards to primary navigation.
      *
-     * @param \core\event\base $event
+     * @param \core\event\base $event Navigation event
      */
     public static function extend_primary_navigation(\core\event\base $event) {
         global $PAGE;

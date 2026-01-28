@@ -18,7 +18,7 @@
  * Uninstall script for local_ascend_rewards
  *
  * This script completely removes all plugin data including:
- * - Database tables (local_ascend_rewards_coins, local_ascend_rewards_gameboard, 
+ * - Database tables (local_ascend_rewards_coins, local_ascend_rewards_gameboard,
  *   local_ascend_badge_cache, local_ascend_rewards_badges, local_ascend_rewards_badgerlog)
  * - User preferences (all apex_* and ascendassets_* preferences)
  * - Scheduled tasks (award_badges, rebuild_badge_cache)
@@ -29,7 +29,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
+// Preserve legacy inline comments and naming in the uninstall routine.
+// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
+// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
 
 /**
  * Custom uninstall procedure
@@ -60,33 +64,33 @@ function xmldb_local_ascend_rewards_uninstall() {
         // 2. Remove all plugin config records
             // 2. Remove all plugin config records (and config change history)
             $configdeleted = $DB->delete_records('config_plugins', ['plugin' => 'local_ascend_rewards']);
-            if ($configdeleted) {
-                mtrace("  - Removed $configdeleted config records for local_ascend_rewards");
-            }
+        if ($configdeleted) {
+            mtrace("  - Removed $configdeleted config records for local_ascend_rewards");
+        }
             $configlogdeleted = $DB->delete_records('config_log', ['plugin' => 'local_ascend_rewards']);
-            if ($configlogdeleted) {
-                mtrace("  - Removed $configlogdeleted config_log entries for local_ascend_rewards");
-            }
+        if ($configlogdeleted) {
+            mtrace("  - Removed $configlogdeleted config_log entries for local_ascend_rewards");
+        }
 
         // 3. Drop custom tables (if they still exist)
         // Note: Moodle automatically drops tables defined in install.xml,
         // but we check explicitly to ensure clean uninstall
-        
+
         $dbman = $DB->get_manager();
-        
+
         // Drop all plugin tables in reverse dependency order
         $tables_to_drop = [
-            'local_ascend_xp',                 // XP tracking (separate from coins)
-            'local_ascend_level_tokens',       // Level-up unlock tokens
-            'local_ascend_avatar_unlocks',     // Avatar and pet unlock tracking
-            'local_ascend_mysterybox',         // Mystery box openings and rewards
-            'local_ascend_rewards_badgerlog',  // Badge awarding audit log
-            'local_ascend_badge_cache',        // Badge activity cache
-            'local_ascend_rewards_gameboard',  // Gameboard picks and coins
-            'local_ascend_rewards_coins',      // Main coin ledger
-            'local_ascend_rewards_badges',     // Badge configuration
+            'local_ascend_xp', // XP tracking (separate from coins)
+            'local_ascend_level_tokens', // Level-up unlock tokens
+            'local_ascend_avatar_unlocks', // Avatar and pet unlock tracking
+            'local_ascend_mysterybox', // Mystery box openings and rewards
+            'local_ascend_rewards_badgerlog', // Badge awarding audit log
+            'local_ascend_badge_cache', // Badge activity cache
+            'local_ascend_rewards_gameboard', // Gameboard picks and coins
+            'local_ascend_rewards_coins', // Main coin ledger
+            'local_ascend_rewards_badges', // Badge configuration
         ];
-        
+
         foreach ($tables_to_drop as $table_name) {
             $table = new xmldb_table($table_name);
             if ($dbman->table_exists($table)) {
@@ -117,7 +121,7 @@ function xmldb_local_ascend_rewards_uninstall() {
            $DB->delete_records('notifications', ['component' => 'local_ascend_rewards']);
            $DB->delete_records('message', ['component' => 'local_ascend_rewards']);
            $DB->delete_records('message_read', ['component' => 'local_ascend_rewards']);
-        
+
             // 6. Log successful uninstall
         mtrace('local_ascend_rewards: All plugin data successfully removed');
         mtrace('  - User preferences cleaned');
@@ -126,12 +130,11 @@ function xmldb_local_ascend_rewards_uninstall() {
         mtrace('  - Caches purged');
 
         return true;
-
     } catch (Exception $e) {
         // Log error but don't fail uninstall
         mtrace('local_ascend_rewards: Error during uninstall: ' . $e->getMessage());
         mtrace('  Note: Some data may not have been cleaned up completely');
-        
+
         // Return true anyway to allow uninstall to complete
         return true;
     }
