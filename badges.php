@@ -27,11 +27,6 @@ namespace local_ascend_rewards;
 require_once(__DIR__ . '/../../config.php');
 require_login();
 // Preserve existing behavior without broad naming and reflow changes.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine,moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Commenting.MissingDocblock.Constant,moodle.Files.MoodleInternal.MoodleInternalGlobalState
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 $PAGE->set_context($context);
@@ -92,7 +87,6 @@ if ($action === 'save' && confirm_sesskey()) {
 }
 echo $OUTPUT->footer();
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 /**

@@ -26,13 +26,9 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // Preserve existing comment separators and mapping annotations.
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
 
 /**
  * Default coin mapping (Badge ID -> Coins).

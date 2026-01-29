@@ -25,13 +25,6 @@
 require_once(__DIR__ . '/../../config.php');
 require_login();
 // This page contains styling-sensitive inline HTML/CSS blocks.
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect,Generic.WhiteSpace.ScopeIndent.IncorrectExact
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.File
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
-// phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
 // Allow managers, teachers, and site admins to access the admin dashboard
 $context = context_system::instance();
 if (!has_capability('moodle/course:bulkmessaging', $context) && !has_capability('moodle/site:config', $context)) {

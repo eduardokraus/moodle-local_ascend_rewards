@@ -26,7 +26,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// phpcs:disable moodle.Commenting.InlineComment.NotCapital
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_ascend_rewards', get_string('pluginname', 'local_ascend_rewards'));
 

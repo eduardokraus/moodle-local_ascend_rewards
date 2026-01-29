@@ -24,7 +24,6 @@
 
 namespace local_ascend_rewards\hook_callbacks;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 /**

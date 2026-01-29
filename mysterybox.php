@@ -24,7 +24,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// phpcs:disable moodle.Files.RequireLogin.Missing
 require_once(__DIR__ . '/../../config.php');
 if (!defined('CLI_SCRIPT')) {
     require_login();
@@ -35,10 +34,6 @@ require_once(__DIR__ . '/classes/performance_cache.php');
 global $DB, $USER;
 
 // This endpoint contains extensive legacy logic and inline comments.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine,Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 
 header('Content-Type: application/json');
 

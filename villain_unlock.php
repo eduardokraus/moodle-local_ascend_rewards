@@ -28,11 +28,6 @@ require_once(__DIR__ . '/../../config.php');
 require_login();
 require_once(__DIR__ . '/classes/performance_cache.php');
 // Preserve legacy naming while we stabilize submission checks.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine,Squiz.PHP.CommentedOutCode.Found
 
 header('Content-Type: application/json');
 

@@ -26,16 +26,9 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // This observer contains legacy naming and comment separators.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
 
 /**
  * Event observer class for activity completion changes.

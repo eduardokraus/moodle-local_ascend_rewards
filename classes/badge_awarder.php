@@ -31,15 +31,6 @@ defined('MOODLE_INTERNAL') || die();
 
 // This file contains a large amount of legacy logic and separator comments.
 // Suppress style sniffs that would require broad renaming/reflow.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar
-// phpcs:disable moodle.Commenting.MissingDocblock.Function,moodle.Commenting.MissingDocblock.Constant
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameLowerCase
-// phpcs:disable moodle.NamingConventions.ValidVariableName.MemberNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.NotCapital,moodle.Commenting.DocblockDescription.Missing
-// phpcs:disable moodle.ControlStructures.ControlSignature.Found,Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace
 
 require_once(__DIR__ . '/performance_cache.php');
 

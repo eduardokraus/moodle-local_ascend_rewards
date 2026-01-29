@@ -27,11 +27,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 // This file renders large inline HTML/CSS blocks; avoid reflow that could break layout.
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect,Generic.WhiteSpace.ScopeIndent.IncorrectExact
-// phpcs:disable moodle.Commenting.MissingDocblock.File
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
 
 // Get user's level for unlocking
 $user_level = $level;

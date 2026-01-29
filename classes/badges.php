@@ -16,14 +16,9 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // Preserve constant naming and inline annotation comments.
-// phpcs:disable moodle.Commenting.MissingDocblock.Constant
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 
 /**
  * Central badge registry & category mapping.

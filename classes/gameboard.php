@@ -24,17 +24,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // This class favors stable output over broad naming refactors.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable Squiz.PHP.CommentedOutCode.Found
 
 /**
  * Gameboard class for weekly badge tracking.

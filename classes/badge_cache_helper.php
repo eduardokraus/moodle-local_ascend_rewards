@@ -16,14 +16,9 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // Preserve legacy naming and comment separators in this helper.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 
 /**
  * Helper class for badge activity caching.

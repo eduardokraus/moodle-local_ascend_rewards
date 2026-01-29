@@ -16,15 +16,9 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 // This helper uses legacy naming and separator comments.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
-// phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 
 /**
  * Cache warming helper.

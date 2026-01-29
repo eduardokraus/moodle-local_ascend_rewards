@@ -24,7 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-// phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment,moodle.Files.LangFilesOrdering.IncorrectOrder
 $string['admin_dashboard'] = 'Admin Dashboard';
 $string['allow_repeat_same_badge'] = 'Allow repeat of same badge in same course';
 $string['allow_repeat_same_badge_desc'] = 'If enabled, the same badge may be awarded multiple times to the same user for the same course.';

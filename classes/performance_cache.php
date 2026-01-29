@@ -26,12 +26,8 @@
 
 namespace local_ascend_rewards;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 // Preserve legacy naming and inline comments in this cache helper.
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
 
 /**
  * Performance cache class for caching expensive operations.

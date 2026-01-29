@@ -31,12 +31,6 @@ admin_externalpage_setup('local_ascend_rewards_audit');
 $context = context_system::instance();
 require_capability('moodle/site:config', $context);
 // This page renders large inline HTML; suppress layout-sensitive sniffs.
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect,Generic.WhiteSpace.ScopeIndent.IncorrectExact
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.File
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine
 
 $PAGE->set_url(new moodle_url('/local/ascend_rewards/admin_audit.php'));
 $PAGE->set_title(get_string('audit_trail', 'local_ascend_rewards'));

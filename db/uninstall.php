@@ -29,11 +29,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 // Preserve legacy inline comments and naming in the uninstall routine.
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
 
 /**
  * Custom uninstall procedure

@@ -27,10 +27,6 @@
 require_once(__DIR__ . '/../../config.php');
 require_login();
 // Keep existing naming and inline comments stable.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
 
 header('Content-Type: application/json');
 

@@ -24,10 +24,6 @@
 require_once(__DIR__ . '/../../config.php');
 require_login();
 // This endpoint favors stability over broad renaming/reflow.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalGlobalState
 
 $perfstart = microtime(true);
 $perflog = [];

@@ -26,10 +26,6 @@ require_once(__DIR__ . '/../../config.php');
 
 require_login();
 // Preserve naming and inline comment separators without altering behavior.
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.Commenting.MissingDocblock.Function
 
 $courseid = optional_param('courseid', 0, PARAM_INT);
 

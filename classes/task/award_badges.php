@@ -16,7 +16,6 @@
 
 namespace local_ascend_rewards\task;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 /**

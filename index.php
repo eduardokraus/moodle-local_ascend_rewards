@@ -29,25 +29,6 @@ require_login();
 
 // This script renders large inline HTML/CSS blocks. Avoid auto-reflow that could
 // change rendering by suppressing line length, variable naming, and indent sniffs.
-// phpcs:disable moodle.Files.LineLength.MaxExceeded,moodle.Files.LineLength.TooLong
-// phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameUnderscore
-// phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect,Generic.WhiteSpace.ScopeIndent.IncorrectExact
-// phpcs:disable moodle.Commenting.MissingDocblock.File
-// phpcs:disable moodle.Commenting.InlineComment.InvalidEndChar,moodle.Commenting.InlineComment.NotCapital
-// phpcs:disable moodle.Commenting.InlineComment.DocBlock
-// phpcs:disable Squiz.WhiteSpace.SuperfluousWhitespace.EndLine,Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines
-// phpcs:disable Squiz.WhiteSpace.ControlStructureSpacing.SpacingBeforeClose
-// phpcs:disable Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis,Squiz.ControlStructures.ControlSignature.SpaceAfterKeyword
-// phpcs:disable Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace,Squiz.ControlStructures.ElseIfDeclaration.NotAllowed
-// phpcs:disable Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore,Squiz.WhiteSpace.ScopeClosingBrace.Indent
-// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
-// phpcs:disable Generic.ControlStructures.InlineControlStructure.NotAllowed,Generic.CodeAnalysis.EmptyStatement.DetectedCatch
-// phpcs:disable PSR12.Operators.OperatorSpacing.NoSpaceBefore,PSR12.Operators.OperatorSpacing.NoSpaceAfter
-// phpcs:disable PSR2.Methods.FunctionCallSignature.MultipleArguments,Squiz.Functions.MultiLineFunctionDeclaration.Indent
-// phpcs:disable NormalizedArrays.Arrays.CommaAfterLast.MissingMultiLine,Generic.Arrays.DisallowLongArraySyntax.Found
-// phpcs:disable Universal.Lists.DisallowLongListSyntax.Found,Generic.Formatting.DisallowMultipleStatements.SameLine
-// phpcs:disable moodle.WhiteSpace.WhiteSpaceInStrings.EndLine,moodle.Commenting.MissingDocblock.Function
-// phpcs:disable moodle.PHP.IncludingFile.UseRequire,Squiz.PHP.CommentedOutCode.Found
 
 // Include performance cache helper
 require_once(__DIR__ . '/classes/performance_cache.php');

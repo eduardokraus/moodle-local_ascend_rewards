@@ -36,7 +36,6 @@ use core_privacy\local\request\plugin\provider as plugin_provider;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
 
-// phpcs:disable moodle.Files.MoodleInternal.MoodleInternalNotNeeded
 defined('MOODLE_INTERNAL') || die();
 
 /**
